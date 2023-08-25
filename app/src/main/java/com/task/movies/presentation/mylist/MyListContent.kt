@@ -23,7 +23,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -36,7 +35,7 @@ import com.task.movies.R
 import com.task.movies.domain.models.MyList
 import com.task.movies.presentation.ui.navigation.Screen
 import com.task.movies.presentation.ui.theme.EXTRA_SMALL_PADDING
-import com.task.movies.presentation.ui.theme.ICON_SIZE
+import com.task.movies.presentation.ui.theme.MEDIUM_PADDING
 import com.task.movies.presentation.ui.theme.SMALL_PADDING
 import com.task.movies.util.Constants
 import kotlinx.coroutines.delay
@@ -53,66 +52,71 @@ fun DisplayMyList(
     val list = viewModel.list.value.collectAsState(initial = emptyList())
     val currentList: State<List<MyList>> by remember { mutableStateOf(list) }
 
-    LazyColumn(
-        modifier = Modifier.padding(SMALL_PADDING),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ){
-        items(
-            items = currentList.value,
-            key = {myList->
-                myList.listId
-            }
-        ){fav->
-            val dismissState = rememberDismissState()
-            val dismissDirection = dismissState.dismissDirection
-            val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
-
-            if(isDismissed && dismissDirection == DismissDirection.EndToStart){
-                val scope = rememberCoroutineScope()
-                scope.launch {
-                    delay(300)
-                    onSwipeToDelete(fav)
+    Column (modifier = Modifier
+        .fillMaxWidth()
+        .background(color = MaterialTheme.colors.secondary)
+        .padding(MEDIUM_PADDING)) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colors.secondary),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ){
+            items(
+                items = currentList.value,
+                key = {myList->
+                    myList.listId
                 }
-            }
+            ){fav->
+                val dismissState = rememberDismissState()
+                val dismissDirection = dismissState.dismissDirection
+                val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
 
-            val degrees by animateFloatAsState(
-                targetValue =
-                if (dismissState.targetValue == DismissValue.Default)
-                    0f
-                else
-                    -45f
-            )
-            var itemAppeared by remember { mutableStateOf(false) }
-
-            LaunchedEffect(key1 = true ){
-                itemAppeared = true
-            }
-            AnimatedVisibility(
-                visible = itemAppeared && !isDismissed,
-                enter = expandVertically(
-                    animationSpec = tween(
-                        durationMillis = 300,
-                    )
-                ),
-                exit = shrinkVertically(
-                    animationSpec = tween(
-                        durationMillis = 300
-                    )
-                )
-            ){
-                SwipeToDismiss(
-                    state =dismissState,
-                    directions = setOf(DismissDirection.EndToStart),
-                    dismissThresholds = { FractionalThreshold(fraction = 0.2f) },
-                    background = {DeleteBackground(degrees = degrees)},
-                    dismissContent = {
-                        MyListItem(
-                            modifier = Modifier.height(130.dp),
-                            onClick = {
-                                navController.navigate(route = Screen.Detail.passMovieId(fav.listId))
-                        }, favouriteMovie = fav)
+                if(isDismissed && dismissDirection == DismissDirection.EndToStart){
+                    val scope = rememberCoroutineScope()
+                    scope.launch {
+                        delay(300)
+                        onSwipeToDelete(fav)
                     }
+                }
+
+                val degrees by animateFloatAsState(
+                    targetValue =
+                    if (dismissState.targetValue == DismissValue.Default)
+                        0f
+                    else
+                        -45f
                 )
+                var itemAppeared by remember { mutableStateOf(false) }
+
+                LaunchedEffect(key1 = true ){
+                    itemAppeared = true
+                }
+                AnimatedVisibility(
+                    visible = itemAppeared && !isDismissed,
+                    enter = expandVertically(
+                        animationSpec = tween(
+                            durationMillis = 300,
+                        )
+                    ),
+                    exit = shrinkVertically(
+                        animationSpec = tween(
+                            durationMillis = 300
+                        )
+                    )
+                ){
+                    SwipeToDismiss(
+                        state =dismissState,
+                        directions = setOf(DismissDirection.EndToStart),
+                        dismissThresholds = { FractionalThreshold(fraction = 0.2f) },
+                        background = {DeleteBackground(degrees = degrees)},
+                        dismissContent = {
+                            MyListItem(
+                                modifier = Modifier.height(130.dp),
+                                onClick = {
+                                    navController.navigate(route = Screen.Detail.passMovieId(fav.listId))
+                                }, favouriteMovie = fav)
+                        }
+                    )
+                }
             }
         }
     }
@@ -195,7 +199,7 @@ fun DeleteBackground(degrees:Float) {
 @Composable
 fun EmptyListContent() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colors.secondary),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){

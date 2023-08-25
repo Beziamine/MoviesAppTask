@@ -2,10 +2,12 @@ package com.task.movies.presentation.details.components
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -53,7 +55,8 @@ fun DetailContent(navController: NavHostController,
     val context = LocalContext.current
 
     Column (modifier = Modifier
-        .fillMaxWidth()
+        .fillMaxSize()
+        .background(color = MaterialTheme.colors.secondary)
         .padding(MEDIUM_PADDING)) {
 
         DetailHeader(onCloseClick = { navController.popBackStack()},

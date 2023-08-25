@@ -1,25 +1,31 @@
 package com.task.movies.presentation.ui.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
+@SuppressLint("ConflictingOnColor")
 private val DarkColorPalette = darkColors(
     primary = Black,
     primaryVariant = White,
-    secondary = Gray,
+    secondary = PrimaryDark,
+    secondaryVariant = SecondaryDark,
     surface = White,
-    secondaryVariant = DarkGray
+    background = White
+
 )
 
 private val LightColorPalette = lightColors(
     primary = White,
     primaryVariant = Black,
-    secondary = Gray,
+    secondary = SecondaryLight,
+    secondaryVariant = PrimaryLight,
     surface = Black,
-    secondaryVariant = Gray
+    background = Black
+
 
 )
 

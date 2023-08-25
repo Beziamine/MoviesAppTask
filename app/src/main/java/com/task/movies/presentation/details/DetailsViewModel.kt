@@ -1,7 +1,7 @@
 package com.task.movies.presentation.details
 
 import androidx.lifecycle.ViewModel
-import com.task.movies.domain.models.*
+import com.task.movies.domain.models.MoviesDetails
 import com.task.movies.domain.use_cases.UseCases
 import com.task.movies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

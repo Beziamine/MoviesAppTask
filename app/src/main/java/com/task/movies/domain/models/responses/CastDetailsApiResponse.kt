@@ -1,7 +1,7 @@
 package com.task.movies.domain.models.responses
 
-import com.task.movies.domain.models.CastDetails
 import com.google.gson.annotations.SerializedName
+import com.task.movies.domain.models.CastDetails
 
 data class CastDetailsApiResponse(
     @SerializedName("id")

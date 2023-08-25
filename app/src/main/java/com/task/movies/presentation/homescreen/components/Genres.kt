@@ -39,7 +39,7 @@ fun Genres(
         ){
             Text(
                 modifier = Modifier
-                    .background(color = Color.DarkGray)
+                    .background(color = MaterialTheme.colors.secondaryVariant)
                     .clickable {
                         viewModel.setGenre(genre.name)
                         viewModel.discoverMovies(genre.id)

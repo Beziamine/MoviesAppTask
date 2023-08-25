@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -59,8 +60,8 @@ fun HomeScreen(
 
     Column (modifier = Modifier
         .fillMaxWidth()
+        .background(color = MaterialTheme.colors.secondary)
         .padding(MEDIUM_PADDING, MEDIUM_PADDING, MEDIUM_PADDING, LARGE_PADDING)) {
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,6 +70,7 @@ fun HomeScreen(
                 Text(
                     text = stringResource(R.string.categories),
                     color = MaterialTheme.colors.surface,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
                     style = MaterialTheme.typography.subtitle1
                 )
@@ -164,7 +166,8 @@ fun MovieItem(
     imageUrl:String,
 ){
     Card(
-        modifier = modifier
+        modifier = modifier,
+        shape = RoundedCornerShape(SMALL_PADDING)
     ){
         Row (modifier = modifier
             .fillMaxWidth()
@@ -181,7 +184,6 @@ fun MovieItem(
                 contentScale = ContentScale.Crop,
                 contentDescription = stringResource(R.string.image_banner)
             )
-
             Column(
                 modifier = modifier
                     .weight(7f)

@@ -1,7 +1,7 @@
 package com.task.movies.domain.models.responses
 
-import com.task.movies.domain.models.PopularMovies
 import com.google.gson.annotations.SerializedName
+import com.task.movies.domain.models.PopularMovies
 
 data class PopularMoviesApiResponses(
     @SerializedName("page")

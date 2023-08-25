@@ -7,7 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import com.task.movies.domain.models.*
+import com.task.movies.domain.models.DiscoverMovies
+import com.task.movies.domain.models.Genres
 import com.task.movies.domain.use_cases.UseCases
 import com.task.movies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

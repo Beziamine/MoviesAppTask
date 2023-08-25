@@ -13,7 +13,6 @@ fun ListScreen(
     navController: NavHostController,
     viewModel: MyListViewModel = hiltViewModel(),
 ) {
-
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         scaffoldState = scaffoldState,

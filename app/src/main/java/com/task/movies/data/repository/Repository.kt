@@ -1,8 +1,10 @@
 package com.task.movies.data.repository
 
 import androidx.paging.PagingData
-import com.task.movies.domain.models.*
-import com.task.movies.domain.models.responses.*
+import com.task.movies.domain.models.DiscoverMovies
+import com.task.movies.domain.models.MoviesDetails
+import com.task.movies.domain.models.MyList
+import com.task.movies.domain.models.responses.GenresApiResponses
 import com.task.movies.domain.repository.DataStoreOperations
 import com.task.movies.domain.repository.LocalDataSource
 import com.task.movies.domain.repository.RemoteDataSource

@@ -14,4 +14,3 @@ data class MyList(
     val mediaType: String,
     val releaseDate : String
 )
-

@@ -1,8 +1,9 @@
 package com.task.movies.domain.repository
 
 import androidx.paging.PagingData
-import com.task.movies.domain.models.*
-import com.task.movies.domain.models.responses.*
+import com.task.movies.domain.models.DiscoverMovies
+import com.task.movies.domain.models.MoviesDetails
+import com.task.movies.domain.models.responses.GenresApiResponses
 import com.task.movies.util.Resource
 import kotlinx.coroutines.flow.Flow
 

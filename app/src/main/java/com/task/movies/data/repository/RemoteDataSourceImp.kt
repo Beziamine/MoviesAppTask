@@ -4,10 +4,11 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.task.movies.data.paging_source.*
+import com.task.movies.data.paging_source.DiscoverMoviesSource
 import com.task.movies.data.remote.Api
-import com.task.movies.domain.models.*
-import com.task.movies.domain.models.responses.*
+import com.task.movies.domain.models.DiscoverMovies
+import com.task.movies.domain.models.MoviesDetails
+import com.task.movies.domain.models.responses.GenresApiResponses
 import com.task.movies.domain.repository.RemoteDataSource
 import com.task.movies.util.Constants.ITEMS_PER_PAGE
 import com.task.movies.util.Resource

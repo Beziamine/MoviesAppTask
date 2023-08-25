@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <string name="image_banner">Image Banner</string>
+    <string name="genres">Genres</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="release_date">Release Date</string>
+    <string name="casts">Casts</string>
+    <string name="background_image">Background Image</string>
+    <string name="close_button">Close button</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="search">Search…</string>
+    <string name="categories">Categories</string>
+    <string name="delete_icon">Delete_Icon</string>
+    <string name="empty_content">Empty content</string>
+    <string name="nothing_to_display">Nothing to display</string>
+    <string name="my_list">My List</string>
+    <string name="like_movie_show">Like Movie</string>
+    <string name="discover_movies">Discover Movies</string>
+    <string name="oops_something_went_wrong">Oops! Something Went Wrong</string>
+    <string name="couldn_t_reach_server_check_your_internet_connection">Couldn\'t Reach Server! Check Your Internet Connection</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="no_title_provided">No title provided</string>
+    <string name="no_release_date_provided">No release date provided</string>
+    <string name="removed_from_my_list">Removed from my list</string>
+    <string name="added_to_watchlist">Added to watchlist</string>
+    <string name="release">Release :</string>
+    <string name="all_genres">Genres :</string>
+    <string name="overview">Overview :</string>
+    <string name="homepage">Homepage :</string>
+    <string name="budget">Budget :</string>
+    <string name="revenue">Revenue :</string>
+    <string name="spoken_languages">Spoken Languages :</string>
+    <string name="status">Status :</string>
+    <string name="runtime">Runtime :</string>
+</resources>

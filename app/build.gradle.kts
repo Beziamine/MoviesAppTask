@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
@@ -63,10 +64,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.test:core-ktx:1.5.0")
-    // A. Dependency Versions
     // 1. Core
-    val kotlin_version = "1.5.31"
     val core_ktx = "1.5.0"
     val kotlin_serialization = "1.2.2"
 
@@ -96,15 +94,14 @@ dependencies {
     val hilt_android_compiler = "2.43.2"
     val hilt_android_testing = "2.42"
 
-    // B. Test Dependency versions
+    // 6. Test Dependency versions
     val junit = "4.13.2"
-    val junit_ext = "1.1.3"
+    val junit_ext = "1.1.5"
     val espresso_core = "3.4.0"
     val test_runner = "1.5.1"
     val kotlinx_coroutines_test ="1.6.4"
     val core_testing = "2.1.0"
-    val truth= "1.1.3"
-    val mock_webserver = "4.9.1"
+    val truth = "1.1.3"
     val mockito_android = "3.10.0"
     val mockito_inline = "3.11.2"
     val mockito_kotlin = "3.2.0"
@@ -112,16 +109,15 @@ dependencies {
     val mockito_core = "3.11.2"
     val robolectric = "4.8.1"
 
+    // 7. Firebase
+    val firebase = "31.0.0"
+
     implementation("androidx.core:core-ktx:$core_ktx")
     implementation("androidx.compose.ui:ui:$compose_version")
     implementation("androidx.compose.material:material:$compose_version")
     implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime")
     implementation("androidx.activity:activity-compose:$activity_compose")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:$junit_ext")
-    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_core")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     debugImplementation("androidx.compose.ui:ui-tooling:$compose_version")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
 
@@ -171,13 +167,21 @@ dependencies {
     // Palette API
     implementation("androidx.palette:palette-ktx:$palette")
 
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:$firebase"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
     // Testing
+    implementation("androidx.test:core-ktx:1.5.0")
     androidTestImplementation ("junit:junit:$junit")
     androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinx_coroutines_test")
     androidTestImplementation ("androidx.arch.core:core-testing:$core_testing")
     androidTestImplementation ("com.google.truth:truth:$truth")
     androidTestImplementation ("androidx.test:core-ktx:$core_ktx")
-    androidTestImplementation ("com.squareUp.okhttp3:mockWebserver:$mock_webserver")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_core")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
+    androidTestImplementation("androidx.test.ext:junit:$junit_ext")
     testImplementation ("org.mockito:mockito-android:$mockito_android")
     testImplementation ("org.mockito:mockito-inline:$mockito_inline")
     testImplementation ("org.mockito.kotlin:mockito-kotlin:$mockito_kotlin")
@@ -193,7 +197,6 @@ dependencies {
     testImplementation ("org.robolectric:robolectric:$robolectric")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinx_coroutines_test")
     testImplementation ("androidx.arch.core:core-testing:$core_testing")
-    androidTestImplementation ("androidx.test.ext:junit:$junit")
     androidTestImplementation ("androidx.test.espresso:espresso-core:$espresso_core")
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$compose_version")
     debugImplementation ("androidx.compose.ui:ui-tooling:$compose_version")

@@ -2,10 +2,10 @@ package com.task.movies.data.paging_source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
+import com.google.common.truth.Truth
 import com.task.movies.data.remote.Api
 import com.task.movies.domain.models.PopularMovies
-import com.task.movies.domain.models.responses.PopularMoviesApiResponses
-import com.google.common.truth.Truth
+import com.task.movies.domain.models.responses.DiscoverMoviesApiResponses
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,25 +24,25 @@ import org.robolectric.annotation.Config
 class PopularMoviesSourceTest {
 
     private val service = mockk<Api>()
-    private lateinit var popularMoviesSource: PopularMoviesSource
-    private val popularResponse = mockk<PopularMoviesApiResponses>()
+    private lateinit var discoverMoviesSource: DiscoverMoviesSource
+    private val discoverResponse = mockk<DiscoverMoviesApiResponses>()
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun innit(){
-        coEvery { service.getPopularMovies() } returns popularResponse
+        coEvery { service.getDiscoverMovies() } returns discoverResponse
     }
     @Test
     fun `Popular paging source load - failure - http error`() = runTest {
         val error = RuntimeException("404", Throwable())
 
-        given(service.getPopularMovies()).willThrow(error)
+        given(service.getDiscoverMovies()).willThrow(error)
 
         val expectedResult = PagingSource.LoadResult.Error<Int, PopularMovies>(error)
 
-        Truth.assertThat(expectedResult).isEqualTo(popularMoviesSource.load(
+        Truth.assertThat(expectedResult).isEqualTo(discoverMoviesSource.load(
             PagingSource.LoadParams.Refresh(
                 key = 0,
                 loadSize = 1,

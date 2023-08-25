@@ -3,9 +3,9 @@ package com.task.movies.data.local
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.google.common.truth.Truth
 import com.task.movies.data.local.dao.MyListDao
 import com.task.movies.data.resource.fakeList
-import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -34,14 +34,14 @@ class MyListTest {
     }
 
     @Test
-    fun ` add movie or tv show to my list`()= runTest {
+    fun `add movie to my list`()= runTest {
         dao.addToMyList(fakeList)
         val list = dao.getMyList().first().first()
         Truth.assertThat(list).isEqualTo(fakeList)
     }
 
     @Test
-    fun `delete one movie or tv show from my list`() = runTest{
+    fun `delete one movie from my list`() = runTest{
         dao.addToMyList(fakeList)
         dao.deleteOneFromMyList(1)
         val list = dao.getMyList().first()
@@ -49,7 +49,7 @@ class MyListTest {
     }
 
     @Test
-    fun `delete all movies or tv show from my list`() = runTest{
+    fun `delete all movies from my list`() = runTest{
         dao.addToMyList(fakeList)
         dao.deleteAllContentFromMyList()
         val list = dao.getMyList().first()

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "165547913543",
+    "project_id": "moviesapptask-a15ca",
+    "storage_bucket": "moviesapptask-a15ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165547913543:android:2a00f2247e2330ca435c62",
+        "android_client_info": {
+          "package_name": "com.task.movies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165547913543-2qen2ki6ufiqq6gokb43tem2oos5embi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7Mh3xg7d_YoqvovPp57fFCayqVvhk6lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165547913543-2qen2ki6ufiqq6gokb43tem2oos5embi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

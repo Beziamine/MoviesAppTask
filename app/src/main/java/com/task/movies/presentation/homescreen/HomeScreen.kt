@@ -135,22 +135,25 @@ fun HomeScreen(
                 }
                 is LoadState.Error ->{
                     val error = discoverMovies.loadState.refresh as LoadState.Error
-                    Text(
-                        text = when(error.error){
-                            is HttpException ->{
-                                stringResource(R.string.oops_something_went_wrong)
-                            }
-                            is IOException ->{
-                                stringResource(R.string.couldn_t_reach_server_check_your_internet_connection)
-                            }
-                            else->{
-                                stringResource(R.string.unknown_error)
-                            }
-                        },
-                        textAlign = TextAlign.Center,
-                        color = Color.Red
-                    )
-                }else->{}
+                    Box(Modifier.fillMaxSize()){
+                        Text(modifier = Modifier.align(Alignment.Center),
+                            text = when(error.error){
+                                is HttpException ->{
+                                    stringResource(R.string.oops_something_went_wrong)
+                                }
+                                is IOException ->{
+                                    stringResource(R.string.couldn_t_reach_server_check_your_internet_connection)
+                                }
+                                else->{
+                                    stringResource(R.string.unknown_error)
+                                }
+                            },
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colors.surface
+                        )
+                    }
+                }
+                else -> {}
             }
         }
     }

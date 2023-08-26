@@ -2,7 +2,7 @@ package com.task.movies.util
 
 object Constants {
     const val TABLE_NAME ="table_name"
-    const val APP_DATABASE = "chill_max_database"
+    const val APP_DATABASE = "app_database"
     const val APP_REMOTE_KEYS_DATABASE_TABLE = "app_remote_keys_table"
     const val BASE_URL = "https://api.themoviedb.org/3/"
     const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/"

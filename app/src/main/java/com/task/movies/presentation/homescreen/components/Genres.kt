@@ -7,11 +7,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -24,11 +30,14 @@ fun Genres(
     viewModel: HomeViewModel
 ) { 
     val genres = viewModel.movieGenres.value
+    val listState = rememberLazyListState()
+    var selectedIndex by remember{mutableStateOf(-1)}
 
     LazyRow(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        state = listState
     ){
-        items( items = genres){genre ->
+        items(items = genres){genre ->
         Surface(
             modifier = Modifier
                 .fillMaxSize()
@@ -39,11 +48,15 @@ fun Genres(
         ){
             Text(
                 modifier = Modifier
-                    .background(color = MaterialTheme.colors.secondaryVariant)
-                    .clickable {
-                        viewModel.setGenre(genre.name)
-                        viewModel.discoverMovies(genre.id)
-                    }
+                    .background(color = if (genre.id == selectedIndex) Color.Red else MaterialTheme.colors.secondaryVariant)
+                    .selectable(
+                        selected = genre.id == selectedIndex,
+                        onClick = {
+                            selectedIndex = if (selectedIndex != genre.id)
+                                genre.id!! else -1
+                            viewModel.setGenre(genre.name)
+                            viewModel.discoverMovies(genre.id)
+                        })
                     .padding(SMALL_PADDING),
                 text = genre.name,
                 color = Color.White,

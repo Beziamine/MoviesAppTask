@@ -10,6 +10,7 @@ import androidx.paging.filter
 import com.task.movies.domain.models.DiscoverMovies
 import com.task.movies.domain.models.Genres
 import com.task.movies.domain.use_cases.UseCases
+import com.task.movies.util.TrailingIconState
 import com.task.movies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -24,10 +25,14 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _selectedGenre = mutableStateOf("")
-    val selectedGenre: State<String> = _selectedGenre
+    private val _selectedGenreId = mutableStateOf(-1)
 
     fun setGenre(genres: String){
         _selectedGenre.value = genres
+    }
+
+    fun setGenreId(genreId: Int){
+        _selectedGenreId.value = genreId
     }
 
     private val _getMovieGenres = mutableStateOf<List<Genres>>(emptyList())
@@ -36,12 +41,29 @@ class HomeViewModel @Inject constructor(
     private val _discoverMovies = mutableStateOf<Flow<PagingData<DiscoverMovies>>>(emptyFlow())
     val discoverMovies: State<Flow<PagingData<DiscoverMovies>>> = _discoverMovies
 
+    val trailingIconState= mutableStateOf(TrailingIconState.READY_TO_DELETE)
+
+    private val _searchQuery = mutableStateOf("")
+    val searchQuery = _searchQuery
+
 
     init {
         discoverMovies(null)
         getMovieGenres()
     }
 
+    private fun getMovieGenres(){
+        viewModelScope.launch {
+            when(val result =useCases.getMovieGenresUseCase()){
+                is Resource.Success -> {
+                    _getMovieGenres.value = result.data?.genres!!
+
+                }is Resource.Error ->{
+
+            }else ->{}
+            }
+        }
+    }
 
     fun discoverMovies(genreId: Int?) {
         viewModelScope.launch {
@@ -57,16 +79,21 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getMovieGenres(){
+    fun search(query: String) {
         viewModelScope.launch {
-            when(val result =useCases.getMovieGenresUseCase()){
-                is Resource.Success -> {
-                    _getMovieGenres.value = result.data?.genres!!
-
-                }is Resource.Error ->{
-
-                }else ->{}
-            }
+            _discoverMovies.value = useCases.getDiscoverMoviesUseCase().map { pagingData ->
+                pagingData.filter {
+                    if(_selectedGenreId.value != -1){
+                        it.title.contains(query, ignoreCase = true) && it.genre_ids.contains(_selectedGenreId.value)
+                    }else {
+                        it.title.contains(query, ignoreCase = true)
+                    }
+                }
+            }.cachedIn(viewModelScope)
         }
+    }
+
+    fun updateSearchQuery(query: String) {
+        _searchQuery.value = query
     }
 }

@@ -55,6 +55,7 @@ fun Genres(
                             selectedIndex = if (selectedIndex != genre.id)
                                 genre.id!! else -1
                             viewModel.setGenre(genre.name)
+                            viewModel.setGenreId(genre.id)
                             viewModel.discoverMovies(genre.id)
                         })
                     .padding(SMALL_PADDING),

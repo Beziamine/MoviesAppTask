@@ -33,4 +33,6 @@
     <string name="spoken_languages">Spoken Languages :</string>
     <string name="status">Status :</string>
     <string name="runtime">Runtime :</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="close_search_bar">close search bar</string>
 </resources>

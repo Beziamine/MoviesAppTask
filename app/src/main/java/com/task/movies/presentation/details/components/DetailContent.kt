@@ -53,7 +53,7 @@ fun DetailContent(navController: NavHostController,
 
     val addToMyList = viewModel.addToMyList.value
     val context = LocalContext.current
-
+    viewModel.ifExists(moviesDetails.id!!)
     Column (modifier = Modifier
         .fillMaxSize()
         .background(color = MaterialTheme.colors.secondary)
@@ -61,14 +61,14 @@ fun DetailContent(navController: NavHostController,
 
         DetailHeader(onCloseClick = { navController.popBackStack()},
             onClick = { if (addToMyList != 0) {
-                viewModel.deleteOneFromMyList(listId = moviesDetails.id!!)
+                viewModel.deleteOneFromMyList(listId = moviesDetails.id)
                 Toast.makeText(context, context.getString(R.string.removed_from_my_list), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, context.getString(R.string.added_to_watchlist), Toast.LENGTH_SHORT
                 ).show()
                 viewModel.addToMyList(
                     MyList(
-                        listId = moviesDetails.id!!,
+                        listId = moviesDetails.id,
                         imagePath = "${Constants.IMAGE_BASE_URL}/${moviesDetails.poster_path}",
                         title = moviesDetails.title.toString(),
                         description = moviesDetails.overview.toString(),

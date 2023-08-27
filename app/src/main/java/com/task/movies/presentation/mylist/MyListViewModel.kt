@@ -54,7 +54,7 @@ class MyListViewModel @Inject constructor(
         }
     }
 
-    private fun ifExists(listId: Int){
+    fun ifExists(listId: Int){
         viewModelScope.launch {
             _addToMyList.value = useCases.ifExistsUseCase(listId)
         }
